@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { FakeApisComponent } from './fake-apis/fake-apis.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SharedModule } from './shared/shared.module';
     CompanyComponent,
     ProfileComponent,
     ReachUsComponent,
-    ShowErrorComponent
+    ShowErrorComponent,
+    FakeApisComponent
   ],
   imports: [
     BrowserModule,

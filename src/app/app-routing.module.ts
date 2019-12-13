@@ -6,6 +6,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ReachUsComponent } from './reach-us/reach-us.component';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
+import { FakeApisComponent } from './fake-apis/fake-apis.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,9 @@ const routes: Routes = [
   }, {
     path: 'reach-us',
     component: ReachUsComponent
+  }, {
+    path: 'fake-apis',
+    component: FakeApisComponent
   }
 ];
 

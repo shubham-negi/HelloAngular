@@ -4,6 +4,8 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { NoDataComponent } from './components/errors/no-data/no-data.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -11,8 +13,13 @@ import { NotFoundComponent } from './components/errors/not-found/not-found.compo
     NotFoundComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
-  exports: []
+  
+  exports: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ]
 })
 export class SharedModule { }
