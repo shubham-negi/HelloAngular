@@ -1,0 +1,12 @@
+ul {
+    list-style: none;
+    padding-inline-start: 0px;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    font-weight: bold;
+    transition-delay: 2s;
+}
+
+li::before {
+    content: '*';
+}

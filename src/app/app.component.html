@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<div>
+  <hr>
+  <a routerLink="/about-us">ABOUT US</a> | 
+  <a routerLink="/company">COMPANY</a> | 
+  <a routerLink="/contact-us">CONTACT US</a> | 
+  <a routerLink="/profile">PROFILE</a> | 
+  <a routerLink="/reach-us">REACH US</a>
+
+  <hr>
+</div>
+<div class="container-box">
+  <router-outlet></router-outlet>
+
+  <div class="loading-overlay" #spinnerElement style="display: none;">
+    <img src="../assets/progress.gif" alt="progress bar">
+  </div>
+</div>

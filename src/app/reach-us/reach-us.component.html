@@ -1,0 +1,30 @@
+<div>
+  <h2>Angular Forms</h2>
+  <form [formGroup]="myForm" (ngSubmit)="register(myForm)" novalidate>
+    <div>
+      <label>Name</label>
+      <input type="text" name="name" formControlName="name">
+      <app-show-error [control]="myForm.controls['name']"></app-show-error>
+    </div>
+
+    <div>
+      <label>Birth Year</label>
+      <input type="text" name="birthYear" formControlName="birthYear">
+    </div>
+
+    <div formGroupName="location">
+      <h3>Location</h3>
+      <div>
+        <label>Country</label>
+        <input type="text" name="country" formControlName="country">
+      </div>
+      <div>
+        <label>City</label>
+        <input type="text" name="city" formControlName="city">
+      </div>
+    </div>
+    <button type="submit">Register</button>
+    <button type="button" (click)="printMyForm()">Print to console</button>
+  </form>
+  <pre>{{myForm.value | json}}</pre>
+</div>
