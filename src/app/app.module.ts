@@ -14,9 +14,12 @@ import { ShowErrorComponent } from './show-error/show-error.component';
 // to use reactive forms module
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { FakeApisComponent } from './fake-apis/fake-apis.component';
+import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
+import { OfflineComponent } from './offline/offline.component';
+import { CommonInterceptor } from './shared/interceptors/common-interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { FakeApisComponent } from './fake-apis/fake-apis.component';
     ProfileComponent,
     ReachUsComponent,
     ShowErrorComponent,
-    FakeApisComponent
+    FakeApisComponent,
+    OfflineComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,10 @@ import { FakeApisComponent } from './fake-apis/fake-apis.component';
     HttpClientModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CommonInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,12 +5,24 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
+  token: string;
   isLogin: boolean;
 
+  constructor() {
+    this.token = localStorage.getItem('access-token');
+  }
+
   public isAuthenticated(): boolean {
-    localStorage.getItem('token') ? this.isLogin = true : this.isLogin = false;
+    if (this.token) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
     return this.isLogin;
   }
 
-  constructor() { }
+  getToken(): string {
+    return this.token;
+  }
+
 }

@@ -1,30 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (localStorage.getItem('access-token') != null) {
-      console.log('has token!');
-      const token = localStorage.getItem('access-token');
-      // if the token is  stored in localstorage add it to http header
-      const headers = new HttpHeaders().set("access-token", "TOKEN-02020232323-TETS");
-      //clone http to the custom AuthRequest and send it to the server 
-      const AuthRequest = request.clone({ headers: headers });
-      return next.handle(AuthRequest)
-    } else {
-      console.log('didn\'t has token!');
-      return next.handle(request);
-    }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const authReq = req.clone({
+      headers: new HttpHeaders({
+        Authorization: this.authService.getToken(),
+        // 'Access-Control-Allow-Origin': '*'
+      })
+    });
+    return next.handle(authReq);
   }
-  // intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  //   const customReq = request.clone({
-  //   });
-  //   return next.handle(customReq);
-  // }
-  constructor() { }
+
+  constructor(private authService: AuthService) { }
+
 }
