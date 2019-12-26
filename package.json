@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.0.1",
     "@angular/platform-browser-dynamic": "~8.0.1",
     "@angular/router": "~8.0.1",
+    "ace-builds": "^1.4.7",
     "bootstrap": "4.1.1",
     "google-libphonenumber": "^3.2.5",
     "ng2-tel-input": "^2.0.3",

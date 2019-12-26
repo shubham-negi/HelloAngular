@@ -20,6 +20,7 @@ import { FakeApisComponent } from './fake-apis/fake-apis.component';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { OfflineComponent } from './offline/offline.component';
 import { CommonInterceptor } from './shared/interceptors/common-interceptor';
+import { OnlineIdeComponent } from './online-ide/online-ide.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CommonInterceptor } from './shared/interceptors/common-interceptor';
     ReachUsComponent,
     ShowErrorComponent,
     FakeApisComponent,
-    OfflineComponent
+    OfflineComponent,
+    OnlineIdeComponent
   ],
   imports: [
     BrowserModule,
