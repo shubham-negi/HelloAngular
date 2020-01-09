@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/mode-java';
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
 
 
 const THEME = 'ace/theme/github';
-const LANG = 'ace/mode/javascript';
+const LANG = 'ace/mode/java';
 
 @Component({
   selector: 'app-online-ide',
@@ -17,7 +18,7 @@ const LANG = 'ace/mode/javascript';
 })
 export class OnlineIdeComponent implements OnInit {
 
-  @ViewChild('codeEditor') codeEditorElmRef: ElementRef;
+  @ViewChild('codeEditor', {static: true}) codeEditorElmRef: ElementRef;
   private codeEditor: ace.Ace.Editor;
   private editorBeautify;
 
