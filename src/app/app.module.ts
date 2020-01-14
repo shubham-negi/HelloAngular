@@ -20,7 +20,7 @@ import { FakeApisComponent } from './fake-apis/fake-apis.component';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { OfflineComponent } from './offline/offline.component';
 import { CommonInterceptor } from './shared/interceptors/common-interceptor';
-import { OnlineIdeComponent } from './online-ide/online-ide.component';
+import { LiveClassModule } from './live-class/live-class.module';
 
 @NgModule({
   declarations: [
@@ -32,8 +32,7 @@ import { OnlineIdeComponent } from './online-ide/online-ide.component';
     ReachUsComponent,
     ShowErrorComponent,
     FakeApisComponent,
-    OfflineComponent,
-    OnlineIdeComponent
+    OfflineComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +42,8 @@ import { OnlineIdeComponent } from './online-ide/online-ide.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    LiveClassModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -8,7 +8,6 @@ import { ReachUsComponent } from './reach-us/reach-us.component';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { FakeApisComponent } from './fake-apis/fake-apis.component';
 import { OfflineComponent } from './offline/offline.component';
-import { OnlineIdeComponent } from './online-ide/online-ide.component';
 
 const routes: Routes = [
   {
@@ -37,7 +36,7 @@ const routes: Routes = [
     component: OfflineComponent
   }, {
     path: 'online-ide',
-    component: OnlineIdeComponent
+    loadChildren: './live-class/live-class.module#LiveClassModule'
   }
 ];
 
