@@ -1,18 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 import * as ace from 'ace-builds';
-import 'ace-builds/src-noconflict/mode-javascript';
-import 'ace-builds/src-noconflict/mode-java';
-import 'ace-builds/src-noconflict/theme-terminal';
-import 'ace-builds/src-noconflict/theme-chrome';
-import 'ace-builds/src-noconflict/theme-twilight';
-
+import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
+import { EditorSetting } from '../editor-settings.service';
 
-
-const THEME = 'ace/theme/terminal';
-const LANG = 'ace/mode/java';
+// const THEME = 'ace/theme/chrome';
+// const LANG = 'ace/mode/javascript';
 
 @Component({
   selector: 'app-online-ide',
@@ -32,7 +26,7 @@ export class OnlineIdeComponent implements OnInit {
   private themeList: any;
   private editor: any;
 
-  constructor() { 
+  constructor(private _editor: EditorSetting) { 
     this.languageList = [
       'java', 'python', 'javascript'
     ]
@@ -40,16 +34,19 @@ export class OnlineIdeComponent implements OnInit {
       'chrome', 'twilight', 'terminal'
     ]
   }
+
   changeEditorLang (newValue: string) {
     this.selectedLang = newValue;
     console.log(this.selectedLang);
     this.setLang(this.selectedLang);
+    this._editor.saveUserPreference('selectedLang', newValue);
   }
 
   changeEditorTheme (newValue: string) {
     this.selectedTheme = newValue;
     console.log(this.selectedTheme);
     this.setTheme(this.selectedTheme);
+    this._editor.saveUserPreference('selectedTheme', newValue);
   }
 
   setTheme(value: string) {
@@ -59,20 +56,58 @@ export class OnlineIdeComponent implements OnInit {
   setLang(value: string) {
     if (value) this.editor.getSession().setMode('ace/mode/' + value);
   }
+
+  setUserPrefs() {
+    if (this.getEditorData()) {
+      console.log('user has used editor before');
+    } else {
+      console.log('user is new here');
+    }
+  }
   
   ngOnInit() {
+    // this.setUserPrefs();
+
     ace.require('ace/ext/language_tools');
     const element = this.codeEditorElmRef.nativeElement;
     const editorOptions = this.getEditorOptions();
 
     this.codeEditor = this.createCodeEditor(element, editorOptions);
     this.editorBeautify = ace.require('ace/ext/beautify');
+    this.applyThemeNMode();
+  }
+
+  applyThemeNMode() {
+    if (this._editor.editorConfig['selectedTheme']) {
+      this.setTheme(this._editor.editorConfig['selectedTheme']);
+      this.selectedTheme = this._editor.editorConfig['selectedTheme'];
+    } else {
+      this.setTheme('chrome');
+      this.selectedTheme = 'chrome';
+    };
+
+    if (this._editor.editorConfig['selectedLang']) {
+      this.setLang(this._editor.editorConfig['selectedLang']);
+      this.selectedLang = this._editor.editorConfig['selectedLang'];
+    } else {
+      this.setLang('javascript');
+      this.selectedLang = 'javascript';
+    }
+  }
+
+  getEditorData() {
+    return JSON.parse(localStorage.getItem('user_settings'))['editor'];
+  }
+
+  setUserPreference(key, value) {
+
+
   }
 
   private createCodeEditor(element: Element, options: any): ace.Ace.Editor {
     this.editor = ace.edit(element, options);
-    this.editor.setTheme(THEME);
-    this.editor.getSession().setMode(LANG);
+    // this.editor.setTheme(THEME);
+    // this.editor.getSession().setMode(LANG);
     this.editor.setShowFoldWidgets(true);
     return this.editor;
   }
@@ -80,8 +115,9 @@ export class OnlineIdeComponent implements OnInit {
   private getEditorOptions(): Partial<ace.Ace.EditorOptions> & { enableBasicAutocompletion?: boolean; } {
     const basicEditorOptions: Partial<ace.Ace.EditorOptions> = {
       highlightActiveLine: true,
-      minLines: 14,
-      maxLines: Infinity,
+      minLines: 20,
+      maxLines: 20,
+      autoScrollEditorIntoView: true
     };
     const extraEditorOptions = {
       enableBasicAutocompletion: true
