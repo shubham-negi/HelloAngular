@@ -8,9 +8,13 @@ import { ReachUsComponent } from './reach-us/reach-us.component';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { FakeApisComponent } from './fake-apis/fake-apis.component';
 import { OfflineComponent } from './offline/offline.component';
+import { CoreComponentComponent } from './core-component/core-component.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: CoreComponentComponent
+  }, {
     path: 'about-us',
     component: AboutUsComponent,
     canActivate: [

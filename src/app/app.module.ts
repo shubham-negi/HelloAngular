@@ -21,6 +21,7 @@ import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { OfflineComponent } from './offline/offline.component';
 import { CommonInterceptor } from './shared/interceptors/common-interceptor';
 import { LiveClassModule } from './live-class/live-class.module';
+import { CoreComponentComponent } from './core-component/core-component.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LiveClassModule } from './live-class/live-class.module';
     ReachUsComponent,
     ShowErrorComponent,
     FakeApisComponent,
-    OfflineComponent
+    OfflineComponent,
+    CoreComponentComponent
   ],
   imports: [
     BrowserModule,

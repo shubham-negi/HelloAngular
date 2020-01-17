@@ -15,6 +15,7 @@ export class EditorSetting {
             this.editorConfig = this.getEditorData();
         } else {
             this.editorConfig['isExpanded'] = false;
+            this.editorConfig['isSideBarVisible'] = false;
             this.editorConfig['selectedLang'] = 'javascript';
             this.editorConfig['selectedTheme'] = 'chrome';
         }
